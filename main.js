@@ -1,42 +1,47 @@
-
-function check(){
-
+document.getElementById('button').addEventListener('click',function(){
 	var question1 = document.quiz.question1.value;
 	var question2 = document.quiz.question2.value;
 	var question3 = document.quiz.question3.value;
-	var correct = 0;
+	var answer = 0;
 
-
-	if (question1 == "Providence") {
-		correct++;
-}
-	if (question2 == "Hartford") {
-		correct++;
-}	
-	if (question3 == "Albany") {
-		correct++;
+	if (question1 == "providence"){
+		answer++;
 	}
+	if (question2 == 'Hartford'){
+		answer++;
+	}
+	if (question3 == 'Albany'){
+		answer++;
+	}
+
+
 	
+	var result;
+
+	if (answer == 3){
+		result = 0;
+	}
+	else if (answer == 2){
+		result = 1;
+	}
+	else if  (answer == 1){
+		result = 1;
+	}
+	else  {
+		result = 2;
+	}
+
 	var pictures = ["img/win.gif", "img/meh.jpeg", "img/lose.gif"];
-	var messages = ["Great job!", "That's just okay", "You really need to do better"];
-	var score;
+	var remarks = ["Great job!", "That's just okay", "You really need to do better"];
 
-	if (correct == 0) {
-		score = 2;
-	}
+	// display result container
+	document.getElementById('after_submit').style.visibility = 'visible';
+	// display remarks
+	document.getElementById("message").innerHTML = remarks[result];
+	// total right answers
+	document.getElementById("number_correct").innerHTML = "You got " + answer + " correct.";
 
-	if (correct > 0 && correct < 3) {
-		score = 1;
-	}
+	// picture to show success or failure 
+	document.getElementById("picture").setAttribute('src', pictures[result]);
 
-	if (correct == 3) {
-		score = 0;
-	}
-
-	document.getElementById("after_submit").style.visibility = "visible";
-
-	document.getElementById("message").innerHTML = messages[score];
-	document.getElementById("number_correct").innerHTML = "You got " + correct + " correct.";
-	document.getElementById("picture").src = pictures[score];
-	}
-	
+});
